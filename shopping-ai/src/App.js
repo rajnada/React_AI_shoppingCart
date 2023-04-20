@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import alanBtn from "@alan-ai/alan-sdk-web";
+import { useEffect, useState } from "react";
 
-function App() {
+const menuItems = [
+  { name: "Angus Burger", price: 8.99, category: "burger" },
+  { name: "Tuna Steak Burger", price: 15.0, category: "burger" },
+  { name: "Bacon Burger", price: 11.5, category: "burger" },
+  { name: "Southwest Chicken Burger", price: 9.99, category: "burger" },
+  { name: "Mozzarella Burger", price: 12.5, category: "burger" },
+  { name: "Cesar Salad", price: 6.5, category: "salad" },
+  { name: "BBQ Chicken Salad", price: 13.99, category: "salad" },
+  { name: "Garden Salad", price: 9.99, category: "salad" },
+  { name: "Veggie Lasagna", price: 17.99, category: "pasta" },
+  { name: "Spaghetti & Meatballs", price: 17.99, category: "pasta" },
+  { name: "Fettuccine Alfredo", price: 17.99, category: "pasta" },
+];
+
+const App = () => {
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    alanBtn({
+      key: "456445fd84a11bc237d00ab5594b3bab2e956eca572e1d8b807a3e2338fdd0dc/stage",
+      onCommand: (commandData) => {},
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {products.map((product) => (
+        <div key={product.name}>
+          {product.name} - {product.price} - {product.category}
+        </div>
+      ))}
+      Cart:
+      {cart.map((cartItem) => (
+        <div key={cartItem.name}>
+          {cartItem.name} - {cartItem.price} - {cartItem.category}
+        </div>
+      ))}
     </div>
   );
-}
+};
 
 export default App;
