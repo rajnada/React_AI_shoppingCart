@@ -25,6 +25,8 @@ const App = () => {
       onCommand: (commandData) => {
         if (commandData.command === "getMenu") {
           setProducts(commandData.data);
+        } else if (commandData.command === "getCart") {
+          setCart((currentCart) => [...currentCart, commandData.data]);
         }
       },
     });
